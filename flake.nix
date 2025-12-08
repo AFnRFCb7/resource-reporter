@@ -14,6 +14,7 @@
                                     channel ,
                                     repo ,
                                     resolution ,
+                                    token ,
                                     type
                                 } :
                                     let
@@ -50,7 +51,7 @@
                                                                                         then
                                                                                             BODY="$*"
                                                                                         fi
-                                                                                        TOKEN=${ resources.production.secrets.token ( setup : setup ) }
+                                                                                        TOKEN=${ token }
                                                                                         gh auth login --with-token < "$TOKEN/secret"
                                                                                         if ! gh label list --json name --jq '.[].name' | grep -qx resource-reporter-scripted
                                                                                         then
@@ -97,6 +98,7 @@
                                             expected ? "6ad72035" ,
                                             repo ? "f6a56b94" ,
                                             resolution ? "a66ecc33" ,
+                                            token ? "fccebd6d" ,
                                             type ? "4934525a"
                                         } :
                                             pkgs.stdenv.mkDerivation
@@ -115,6 +117,7 @@
                                                                                         channel = channel ;
                                                                                         repo = repo ;
                                                                                         resolution = resolution ;
+                                                                                        token = token ;
                                                                                         type = type ;
                                                                                     }
                                                                             ) ;
