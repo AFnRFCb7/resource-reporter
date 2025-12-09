@@ -140,7 +140,7 @@
                                                                                     runtimeInputs = [ failure ] ;
                                                                                     text =
                                                                                         ''
-                                                                                            failure 8c67cfa1 resource-releaser "We expected to see ${ expected } but we observed ${ observed }"
+                                                                                            failure 8c67cfa1 resource-reporter "We expected to see ${ expected } but we observed ${ observed }"
                                                                                         '' ;
                                                                                 }
                                                             )
