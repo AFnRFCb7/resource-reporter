@@ -12,10 +12,10 @@
                             implementation =
                                 {
                                     channel ,
-                                    repo ,
+                                    organization ,
+                                    repository ,
                                     resolution ,
-                                    token ,
-                                    type
+                                    token
                                 } :
                                     let
                                         application =
@@ -57,7 +57,7 @@
                                                                                         then
                                                                                             gh label create resource-reporter-scripted --color "#FF8C00" --description "Scripted by resource-reporter"
                                                                                         fi
-                                                                                        gh issue create --repo "${ repo }" --title "$TITLE" --body "$BODY" --assignee "@me" --label resource-reporter-scripted
+                                                                                        gh issue create --repo "${ organization }/${ repository }" --title "$TITLE" --body "$BODY" --assignee "@me" --label resource-reporter-scripted
                                                                                         gh auth logout
                                                                                     '' ;
                                                                     }
@@ -74,7 +74,7 @@
                                                                     then
                                                                         read -r PAYLOAD
                                                                         TYPE_="$( yq eval ".type" <<< "$PAYLOAD" - )" || failure 2ee1309a
-                                                                        if [[ "${ type } == "$TYPE_" ]] && ( [[ "resolve-init" == "$TYPE_" ]] || [[ "resolve-release" == "$TYPE_" ]] )
+                                                                        if [[ "resolve-init" == "$TYPE_" ]] || [[ "resolve-release" == "$TYPE_" ]]
                                                                         then
                                                                             RESOLUTION="$( yq eval ".resolution" - <<< "$PAYLOAD" )" || failure 629c9f6a
                                                                             if [[ "${ resolution }" == "$RESOLUTION" ]]
@@ -96,10 +96,10 @@
                                         {
                                             channel ? "a44d2223" ,
                                             expected ? "6ad72035" ,
-                                            repo ? "f6a56b94" ,
+                                            organization ? "915e3f48" ,
+                                            repository ? "f6a56b94" ,
                                             resolution ? "a66ecc33" ,
-                                            token ? "fccebd6d" ,
-                                            type ? "4934525a"
+                                            token ? "fccebd6d"
                                         } :
                                             pkgs.stdenv.mkDerivation
                                                 {
@@ -115,10 +115,10 @@
                                                                                 implementation
                                                                                     {
                                                                                         channel = channel ;
-                                                                                        repo = repo ;
+                                                                                        organization = organization ;
+                                                                                        repository = repository ;
                                                                                         resolution = resolution ;
                                                                                         token = token ;
-                                                                                        type = type ;
                                                                                     }
                                                                             ) ;
                                                                     in
