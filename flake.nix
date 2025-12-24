@@ -11,7 +11,7 @@
                         let
                             implementation =
                                 {
-                                    channel ,
+                                    channel ? "redis" ,
                                     organization ,
                                     repository ,
                                     resolution ,
